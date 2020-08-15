@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block titulo %} Registrar proyecto {% endblock titulo %}
+
+{% block panel_navegacion %}
+
+{% endblock %}
+
+{% block contenido %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-primary">Registrar proyecto</h3> </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+            </ol>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-validation">
+                            <form class="form-valide" enctype="multipart/form-data" action="" method="post" novalidate="novalidate">
+                                {% csrf_token %}
+                                {% for campo in form %}
+                                    <div class="col-md-12 col-sm-12 ">
+                                        {% bootstrap_field campo layout='horizontal' %}
+                                    </div>
+                                {% endfor %}
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-success">Registrar</button>
+                                        <button onclick="window.history.back();" class="btn btn-black">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                            
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

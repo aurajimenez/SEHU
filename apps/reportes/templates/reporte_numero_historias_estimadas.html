@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+
+{% block titulo %} Reporte  {% endblock titulo %}
+
+{% block panel_navegacion %}
+
+{% endblock %}
+
+{% block contenido %}
+
+<!-- PERFIL DE USUARIO -->
+
+<div class="container-fluid">
+                <!-- Start Page Content -->
+                <div class="col-md-6">
+
+                <div class="card bg-info1 ">
+                            <div class="card-body">
+                                <div class="card-two"> 
+
+                                <hr>
+                                    <div class="desc">
+                                                <p align="justify"> {{proyecto.total_esfuerzo_horas}}  {{historia.quiero}} {{historia.para}}</p>
+                                                
+                                     
+                                               
+                                                 <p>Estimación: {{historia.estimacionHU}}</p>
+                                              
+                                               
+
+                                                <p>Estado: {{historia.estado}}</p>
+
+                                    </div>
+                                    
+  
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                <!-- End PAge Content -->
+            </div>
+            </div>
+
+{% endblock contenido %}
+

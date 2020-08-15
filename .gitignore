@@ -1,0 +1,9 @@
+*.pyc
+*__pycache__
+apps/*/migrations/
+apps/**/migrations/
+historias_usuario/settings.py
+configuracionBD.json
+media/
+.idea/
+static_collected/

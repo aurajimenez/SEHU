@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+
+{% block titulo %} Proyecto  {% endblock titulo %}
+
+{% block panel_navegacion %}
+
+{% endblock %}
+
+{% block contenido %}
+
+<!-- PERFIL DE PROYECTO  offset-lg-2-->
+
+<div class="container-fluid">
+    <div class="col-md-12 " >
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title" v-if="headerText"><p align="center">{{proyecto.nombre|upper}}</p></strong>
+            </div>
+            <br>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 align="center"><b>Características</b></h4>
+                        <p ><b>Tecnologías</b>: {{proyecto.tecnologias.all|join:", "}}</p>
+                        <p ><b>Enfoque</b>: {{proyecto.enfoque}}</p>
+                        <p ><b>Área del proyecto</b>: {{proyecto.area}}</p>
+                        <p ><b>Tipo de proyecto</b>: {{proyecto.tipo}}</p>
+                        {% if proyecto.estado == "Sin estimar" %}
+                        <p ><b>Complejidad</b>: Sin definir </p> 
+                        <br>
+                        {% else %}
+
+                        {% endif %}
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="desc"><h4 id="titulo-negrita" align="center"><b> Integrantes</b></h4>
+                            <p align="center"> {{proyecto.miembros.all|join:", " }}</p>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contacts" > 
+                        
+                {% if proyecto.creador == user %}
+                    <button type="submit" class="btn btn-success offset-lg-8" >
+                        <a href="{% url 'modificar_proyecto' proyecto.id %}">
+                            Modificar proyecto
+                        </a>
+                    </button>
+                {% endif %}<br>
+                <button type="submit" class="btn btn-success">
+                    <a href="{% url 'estimar_proyecto' proyecto.id %}">
+                        Definir complejidad proyecto
+                    </a>
+                </button>
+           
+                </div>                      
+            </div>  <hr>              
+            <div class="container-fluid">
+                <h4 align="center">
+                    <b>Historias de Usuario</b>
+                </h4>
+                {% if user.cargo == "Manager" %}
+                    <button type="submit" class="btn btn-success">
+                        <a href="{% url 'historia_crear' proyecto.id %}">Registrar HU</a>
+                    </button>
+                {% endif %}            
+                {% if not listar_historias %} 
+                    <hr>
+                    <p>No hay historias de usuario registradas</p>    
+                {% else %}
+                <div class="container-fluid" >
+                <div class="row">
+                    {% for historia in listar_historias %}
+                    <div class="col-md-4">
+
+                                <div class="card bg-info1 p-20">
+                                <h4 class="text-dark" align="center"><a href="{% url 'perfil_historia' historia.id %}">
+                                    {{ historia.identificador|upper}} - {{ historia.nombre|upper}}
+                                </a></h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+
+{% endblock contenido %}
+
