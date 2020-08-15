@@ -3,7 +3,6 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-
 {% block titulo %} Estimación de proyectos {% endblock titulo %}
 
 {% block panel_navegacion %}
@@ -11,51 +10,92 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">Estimaciones</h3> 
-        </div>
-        <div class="col-md-7 align-self-center">
-            <ol class="breadcrumb"></ol>
-        </div>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-primary">Estimaciones</h3> 
     </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb"></ol>
+    </div>
+</div>
 
-    {% if not estimacion_proyecto %}
-        <div>
-            <h3 align="center">No hay estimaciones registradas</h3>   
-        </div>
-    {% else %}
-            <div class="container-fluid" >
-            <div class="row">
-            {% for proyecto in estimacion_proyecto %}
-                <div class="col-md-4">
+{% if not estimacion_proyecto %}
+<div>
+    <h3 align="center">No hay estimaciones registradas</h3>   
+</div>
 
-                            <div class="card bg-light p-20">
-                                <div class="card-body">
+{% else %}
+<div class="container-fluid" >
+    <div class="row">
+
+        {% for proyecto in estimacion_proyecto %}
+        <div class="col-md-12">
+            <div class="card bg-light p-12">  
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table" style="width:70%">
+                            <tbody>
+                            <tr>
+                                <td>
+                                <div class="card-two">
+                                <header>
+                                    <div class="avatar">
+                                        <img src="{% if proyecto.creador.foto_perfil %} {{ MEDIA_URL }}{{ proyecto.creador.foto_perfil }}
+                                        {% else %}
+                                        {% static 'images/users/2.jpg' %}
+                                        {% endif %}">
+                                    </div>
+
+                                        
+                                <p><b>Manager:</b> {{proyecto.creador|upper}}</p> 
+                                </header>
+                                </div>
+                                </td>
+
+                                <td>
                                     <div class="card-two">
                                         <h3>{{proyecto.nombre|upper}} </h3>
                                         <p align="center">Del {{proyecto.fecha_inicio|date:"d-m-Y"}} al {{proyecto.fecha_fin|date:"d-m-Y"}}</p>
-                                        <p align="center"><b>Manager:</b> {{proyecto.creador|upper}}</p>
-
-                                        
-                                        <div class="row" align="center">
-                                        {% for historia in proyecto.historias_del_proyecto.all %}
-                                        
-                                        <p align="center"><b>{{ historia.identificador|upper}}</b> - {{ historia.nombre|upper}}</p>
-                                        <br><p align="center"> Puntos estimados: {{ historia.estimacionHU|floatformat:1}}</p>
-                                        <br>
-
-                                      
-                                        {% endfor %}
-                                        </div>
-                                       
                                     </div>
-                                </div>
-                            </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Puntos</th>
+                                    <th>Prioridad</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            {% for historia in proyecto.historias_del_proyecto.all %}
+                                <tr>
+                                    <td class="color-primary">{{ historia.identificador|upper}}</td>
+                                    <td>{{ historia.estimacionHU|floatformat:1}}</td>
+                                    <td>{{ historia.prioridad|floatformat:1}}</td>
+                                </tr>
+                            {% endfor %}
+                                <tr>
+                                    <td><b>Puntos del proyecto:</b> {{ proyecto.total_esfuerzo_horas}}</td>
+                                </tr>
+
+                            
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                {% endfor %} 
             </div>
-           
-            </div>
-    {% endif %}
+        </div>
+        {% endfor %} 
+    </div>
+    </div>
+</div>
+{% endif %}
 {% endblock contenido %}
