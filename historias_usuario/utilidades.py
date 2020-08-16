@@ -49,7 +49,7 @@ def mayuscula_texto_campos(form_data, campos):
 
 # Funcion que me retorna el selector de fecha
 def MyDateWidget():
-    return DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'})
+    return DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'pickerPosition': 'bottom-left','language':'es'})
 
 # Funcion que me retorna el selector de fecha y hora
 def MyDateTimeWidget():
