@@ -88,9 +88,12 @@
                                                 <hr>
                                                 <b><p align="center">Criterios de aceptación</p></b>
                                                 <p align="center"> {{historia.criterios_aceptacion.all|join:" - "}}</p>
-                                    
+
+                                    {% if estimacionF != 0 %}
                                     <button type="submit" class="btn btn-success" ><a href="{% url 'estimarHistoria' historia.id %}">Estimar historia</a>
-                                    </button></div>
+                                    </button>
+                                    {% endif %}
+                                    </div>
                                 </div>
 
                             </div>
