@@ -4,7 +4,9 @@
 {% load staticfiles %}
 
 
-{% block titulo %} Perfil  {% endblock titulo %}
+{% block titulo %} 
+    Perfil  
+{% endblock titulo %}
 
 {% block panel_navegacion %}
 
@@ -22,7 +24,6 @@
             $(".usuario-username").text(username);
             $("#confirmar-cambio").attr('href',url);
         });
-
 
     </script>
 {% endblock js_propios %}
@@ -48,19 +49,16 @@
                             
                         </header>
                             
-                                <h3>{{usuario.first_name}} {{usuario.last_name}}</h3> 
-                                <p align="center">{{usuario.cargo}}</p>                            
-<div class="desc">
+                        <h3>{{usuario.first_name}} {{usuario.last_name}}</h3> 
+                        <p align="center">{{usuario.cargo}}</p>                            
+                        <div class="desc">
                             {% if user.cargo == "Administrador" or user == usuario %}
                             <button type="submit" class="btn btn-success" ><a href="{% url 'usuario_modificar' usuario.id %}">Modificar perfil</a>
                             </button>
                             {% endif %}
-                            {% if user.cargo == "Administrador"%}
-                            
-                                                      
-                            
 
-<a data-toggle="modal" data-target="#modal-confirmacion" href="#"
+                            {% if user.cargo == "Administrador"%}
+                            <a data-toggle="modal" data-target="#modal-confirmacion" href="#"
                                data-url="{% if usuario.is_active %}
                                             {% url 'inactivar_usuario' usuario.id %}
                                         {% else %}
@@ -69,24 +67,27 @@
                                         "
                                data-usuario-nombre="{{ usuario }}"
                                data-usuario-username="{{ usuario.username }}"
-                               class="btn btn {% if usuario.is_active %}btn-danger{% else %}btn-success{% endif %} cambiar-estado margin-2" >
-                                        {% if usuario.is_active %}
-                                            Desactivar usuario
-                                        {% else %}
-                                            Activar usuario
-                                        {% endif %}
+                               class="btn btn {% if usuario.is_active %}btn-danger
+                               {% else %}
+                               btn-success
+                               {% endif %} cambiar-estado" >
+                                {% if usuario.is_active %}
+                                    Desactivar usuario
+                                {% else %}
+                                    Activar usuario
+                                {% endif %}
                             </a> 
 
                             {% endif %}
                             
-                                <h4><b>Acerca de mi</b></h4>
+                            <h4><b>Acerca de mi</b></h4>
 
-                                <p align="center">{{usuario.acerca_de_mi}}</p>
-                                <p align="center">{{usuario.skills.all|join:", "}}</p><hr>
-<p align="center">{{usuario.email}}</p><p align="center">{{usuario.enfoque}}</p>
+                            <p align="center">{{usuario.acerca_de_mi}}</p>
+                            <p align="center">{{usuario.skills.all|join:", "}}</p><hr>
+                            <p align="center">{{usuario.email}}</p>
+                            <p align="center">{{usuario.enfoque}}</p>
 
-                            </div>
-
+                        </div>
                     </div>
                 </div>
             </div>
