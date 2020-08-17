@@ -101,7 +101,7 @@ def criteriosHistoria(request, id_historia):
 				criterios.historia = historia
 				criterios.save()
 
-			messages.success(request, "La historia ha sido estimada correctamente")
+			messages.success(request, "Criterios de aceptación creados correctamente")
 			return redirect('listar_historias')
 		messages.error(request, "Error al estimar la historia")
 	else:

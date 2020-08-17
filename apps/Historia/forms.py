@@ -21,7 +21,6 @@ class CrearHistoriaForm(forms.ModelForm):
 		self.fields['criterios_aceptacion'].label = 'Cri terios de aceptación'
 		self.fields['prioridad'].label = 'Prioridad'
 
-
 		self.fields['nombre'].required = True
 		self.fields['identificador'].required = True
 		self.fields['quiero'].required = True
@@ -43,7 +42,6 @@ class ModificarHistoriaForm(forms.ModelForm):
 		self.fields['actores'].label = 'Actores'
 		self.fields['para'].label = 'Para'
 		self.fields['criterios_aceptacion'].label = 'Criterios de aceptación'
-		self.fields['proyecto'].label = 'Proyecto'
 		self.fields['prioridad'].label = 'Prioridad'
 
 		self.fields['nombre'].required = True
@@ -52,12 +50,11 @@ class ModificarHistoriaForm(forms.ModelForm):
 		self.fields['actores'].required = True
 		self.fields['para'].required = True
 		self.fields['criterios_aceptacion'].required = True
-		self.fields['proyecto'].required = True
 		self.fields['prioridad'].required = False
 
 	class Meta:
 		model = Historia
-		fields = ('nombre', 'identificador', 'actores','quiero', 'para','criterios_aceptacion', 'prioridad','proyecto', )
+		fields = ('nombre', 'identificador', 'actores','quiero', 'para','criterios_aceptacion', 'prioridad',)
 		widgets = {
             }
 
