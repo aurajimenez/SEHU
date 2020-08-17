@@ -27,6 +27,7 @@ class CrearUsuarioForm(UserCreationForm):
                                   error_messages={'unique': "Ya existe un usuario con este número de documento de identificación" ,
         })
     password1 = forms.CharField(max_length=30, required=True, label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(max_length=30, required=True, label="Confirmación de contraseña", widget=forms.PasswordInput)
 
 
     class Meta:

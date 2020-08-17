@@ -34,7 +34,7 @@ class Usuario(AbstractUser):
 	email = models.CharField(max_length= 200, verbose_name="Correo electrónico", unique=True)
 	is_active = models.BooleanField(default=True)
 	#fecha_nacimiento = models.DataField(verbose_name="Fecha nacimiento", blank=False, null=False)
-	skills = TaggableManager(through=TaggedUsuario)
+	skills = TaggableManager(through=TaggedUsuario, help_text="Una lista de skills separados por comas.")
 	enfoque = models.CharField(max_length= 20, choices= ENFOQUE)
 	#proyecto
 	#estimacion
