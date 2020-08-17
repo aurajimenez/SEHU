@@ -15,96 +15,95 @@
 <!-- PERFIL DE USUARIO -->
 
 <div class="container-fluid">
-                <!-- Start Page Content -->
-                <div class="col-md-6">
-                {% if historia.estado == "Estimada" %}
-                <div class="card bg-info1 ">
-                            <div class="card-body">
-                                <div class="card-two"> 
-                                <div class="card-header">
-                                    <strong class="card-title" v-if="headerText" ><b >{{historia.identificador|upper}} - {{historia.nombre|upper}}</strong></b>
-                                   
-                                    {% if user.cargo == "Manager" %}
-                                    <button type="submit" class="btn btn-success offset-lg-1" ><a href="{% url 'modificarHistoria' historia.id %}">Modificar</a>
-                                    </button>
-                                    {% endif %}
-                                    
-                                </div>
-                                <hr>
-                                    <div class="desc">
-                                                <p align="justify"><b
-                                                    >Como</b> {{historia.actores}}, <b>quiero</b> {{historia.quiero}} <b>con el objetivo de </b>{{historia.para}}</p>
-                                                {% if historia.estado == "Estimada" %}
-                                     
-                                               
-                                                 <p>Estimación: {{historia.estimacionHU|floatformat:1}}</p>
-                                              
-                                                {% else %}
+    <!-- Start Page Content -->
+    <div class="col-md-6">
+        {% if historia.estado == "Estimada" %}
+        <div class="card bg-info1 ">
+            <div class="card-body">
+                <div class="card-two"> 
+                    <div class="card-header">
+                        <strong class="card-title" v-if="headerText">
+                            <b>{{historia.identificador|upper}} - {{historia.nombre|upper}}</b>
+                        </strong> 
 
-                                                <p>Estado: {{historia.estado}}</p>
-                                                
-                                                {% endif %}
-
-                                                <hr>
-                                                <b><p align="center">Criterios de aceptación</p></b>
-                                                <p align="center"> {{historia.criterios_aceptacion.all|join:" - "}}</p>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-success" align="center"><a href="{% url 'estimarHistoria' historia.id %}">Estimar</a>
-                                    </button>{% if proyecto.estado == "Sin estimar" %}
-                                    {% endif %}
-                                    <button type="submit" class="btn btn-success" align="center"><a href="{% url 'criteriosHistoria' historia.id %}">Criterios</a>
-                                    </button>
-
-
-
-
-<div class="btn btn-success offset-lg-6">Prioridad: {{historia.prioridad}}</div>
-                                </div>
-                                
-
-                            </div>
-
-                        </div>
-
+                        {% if user.cargo == "Manager" %}
+                            <a href="{% url 'modificarHistoria' historia.id %}"><i class="fa fa-pencil-square offset-lg-4" style="font-size:36px;color:gray"></i></a>
+                        {% endif %}
                     </div>
-                    {%  else %}
-                    <div class="card bg-light ">
-                            <div class="card-body">
-                                <div class="card-two"> 
-                                <div class="card-header">
-                                    <strong class="card-title" v-if="headerText" ><b >{{historia.identificador|upper}} - {{historia.nombre|upper}}</strong></b>
-                                    {% if user.cargo == "Manager" %}
-                                    <button type="submit" class="btn btn-success offset-lg-1" ><a href="{% url 'modificarHistoria' historia.id %}">Modificar historia</a>
-                                    </button>
-                                    {% endif %}
-                                    
-                                </div>
-                                <hr>
-                                    <div class="desc">
-                                                <p align="justify"><b
-                                                    >Como</b> {{historia.actores}}, <b>quiero</b> {{historia.quiero}} <b>con el objetivo de </b>{{historia.para}}</p>
-                                                <p>Estado: {{historia.estado}}</p>
-                                                <hr>
-                                                <b><p align="center">Criterios de aceptación</p></b>
-                                                <p align="center"> {{historia.criterios_aceptacion.all|join:" - "}}</p>
-
-                                    {% if estimacionF != 0 %}
-                                    <button type="submit" class="btn btn-success" ><a href="{% url 'estimarHistoria' historia.id %}">Estimar historia</a>
-                                    </button>
-                                    {% endif %}
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                    <hr>
+                    <div class="desc">
+                        <p align="justify">
+                            <b>Como</b> {{historia.actores}}, 
+                            <b>quiero</b> {{historia.quiero}} 
+                            <b>con el objetivo de </b>{{historia.para}}.
+                        </p>
+                        
+                        {% if historia.estado == "Estimada" %}
+                            <p><b>Estimación</b>: {{historia.estimacionHU|floatformat:1}}</p>
+                        {% else %}
+                            <p>Estado: {{historia.estado}}</p>
+                        {% endif %}
+                            <hr>
+                            <b><p align="center">Criterios de aceptación</p></b>
+                            <p align="center"> {{historia.criterios_aceptacion.all|join:" - "}}</p>
                     </div>
-                   {%  endif %}
-                <!-- End PAge Content -->
-            </div>
-            </div>
+                        
+                    <button type="submit" class="btn btn-success" align="center">
+                        <a href="{% url 'estimarHistoria' historia.id %}">Estimar</a>
+                    </button>
 
+                    {% if proyecto.estado == "Sin estimar" %}
+                    {% endif %}
+                    
+                    <button type="submit" class="btn btn-success" align="center">
+                        <a href="{% url 'criteriosHistoria' historia.id %}">Criterios</a>
+                    </button>
+
+                    <div class="btn btn-success offset-lg-6">
+                        Prioridad: {{historia.prioridad}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {%  else %}
+
+    <div class="card bg-light ">
+        <div class="card-body">
+            <div class="card-two"> 
+                <div class="card-header">
+                    <strong class="card-title" v-if="headerText" >
+                        <b>{{historia.identificador|upper}} - {{historia.nombre|upper}}</b>
+                    </strong>
+
+                    {% if user.cargo == "Manager" %}
+                        <a href="{% url 'modificarHistoria' historia.id %}">
+                            <i class="fa fa-pencil-square offset-lg-4" style="font-size:36px;color:gray"></i>
+                        </a>
+                    {% endif %}
+                    
+                </div>
+                <hr>
+                <div class="desc">
+                    <p align="justify">
+                        <b>Como</b> {{historia.actores}}, 
+                        <b>quiero</b> {{historia.quiero}} 
+                        <b>con el objetivo de </b>{{historia.para}}.</p>
+                    <hr>
+                    <b><p align="center">Criterios de aceptación</p></b>
+                    <p align="center"> {{historia.criterios_aceptacion.all|join:" - "}}</p>
+                
+                    <button type="submit" class="btn btn-success">
+                        <a href="{% url 'estimarHistoria' historia.id %}">Estimar historia</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {%  endif %}
+</div>
+              
+            <!-- End PAge Content -->
 {% endblock contenido %}
 

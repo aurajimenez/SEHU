@@ -27,7 +27,7 @@ class Historia(models.Model):
 	actores = models.CharField(max_length= 500, verbose_name= "Actores")
 	quiero = models.TextField()
 	para = models.TextField()
-	criterios_aceptacion = TaggableManager(through=TaggedHistoria)
+	criterios_aceptacion = TaggableManager(through=TaggedHistoria, help_text="Criterios de aceptación")
 	proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, related_name="historias_del_proyecto")
 	estimacionHU = models.FloatField(max_length= 50, null= True, default= 0)
 	prioridad = models.IntegerField(null= True, default= 1)
