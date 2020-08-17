@@ -4,36 +4,13 @@
 {% load staticfiles %}
 
 
-{% block titulo %} Modificar usuario {% endblock titulo %}
+{% block titulo %} 
+    Modificar usuario 
+{% endblock titulo %}
 
 {% block panel_navegacion %}
-<nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Menú</li>
-                        <li> <a class="has-arrow  " href="{% static '#" aria-expanded="false"><i class="fa fa-group"></i><span class="hide-menu">Gestión de usuarios </span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{% url 'usuario_crear_modificar' %}">Registrar integrante </a></li>
-                                <li><a href="{% url 'listar_usuarios' %}">Listar integrantes </a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="{% static '#" aria-expanded="false"><i class="fa fa-folder-open"></i><span class="hide-menu">Gestión de proyectos</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{% url 'proyecto_crear_modificar' %}">Registrar proyecto</a></li>
-                                <li><a href="{% url 'listar_proyectos' %}">Listar proyectos</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="{% static '#" aria-expanded="false"><i class="fa fa-file-o"></i><span class="hide-menu">Gestión de historias</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{% url 'historia_crear' %}">Registrar historia de usuario</a></li>
-                                <li><a href="{% url 'listar_historias' %}">Listar historias de usuarios</a></li>
-                            </ul>
-                        </li>
 
-                    </ul>
-                </nav>
-
-{% endblock %}
+{% endblock panel_navegacion %}
 
 {% block contenido %}
 <div class="row page-titles">

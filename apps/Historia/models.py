@@ -72,8 +72,6 @@ class Estimacion(models.Model):
 		('No', 'No'),
 	)
 
-
-	
 	porcentaje_reutilizacion = models.FloatField(max_length= 50, null= True, default=0)
 	estimacionF = models.FloatField(max_length= 50, null= True, default=0)
 	estimador = models.ForeignKey(Usuario, on_delete=models.CASCADE)

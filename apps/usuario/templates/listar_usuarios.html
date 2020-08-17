@@ -22,10 +22,10 @@
                     <div class="card-two">
                         <header>
                         <div class="avatar">
-                        <img src="{% if miembro.foto_perfil %} {{ MEDIA_URL }}{{ miembro.foto_perfil }}
-                        {% else %}
+                            <img src="{% if miembro.foto_perfil %} {{ MEDIA_URL }}{{ miembro.foto_perfil }}
+                            {% else %}
                             {% static 'images/users/2.jpg' %}
-                        {% endif %}">
+                            {% endif %}">
                         </header>
 
                         <h3>{{miembro.first_name}} {{miembro.last_name}}</h3>

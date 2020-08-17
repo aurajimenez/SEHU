@@ -4,7 +4,9 @@
 {% load staticfiles %}
 
 
-{% block titulo %} Listar proyectos {% endblock titulo %}
+{% block titulo %} 
+    Listar proyectos 
+{% endblock titulo %}
 
 {% block panel_navegacion %}
 
@@ -50,17 +52,17 @@
                                     <h3>{{proyecto.nombre|upper}} </h3>
                                     
                                         <div class="contacts" >
-                                        <a href="{% url 'perfil_proyecto' proyecto.id %}">
-                                        <i class="fa fa-plus" ></i>
-                                    </a></div>
+                                            <a href="{% url 'perfil_proyecto' proyecto.id %}">
+                                            <i class="fa fa-plus" ></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
                     </div>
-
             {% endfor %}  
             </div>
-            </div>
+        </div>
     {% endif %}
 {% endblock contenido %}
