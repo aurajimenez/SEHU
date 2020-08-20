@@ -118,7 +118,7 @@ def perfil_modificar(request, id_usuario=None):
 	return render(request, "modificar_usuario.html", {'form': form})
 
 def listarUsuarios(request):
-	listar_usuarios = Usuario.objects.all().exclude(cargo= 'Administrador')
+	listar_usuarios = Usuario.objects.all().exclude(cargo= 'Administrador',is_active= False)
 	return render(request, "listar_usuarios.html", {
 		'listar_usuarios': listar_usuarios,
 		})
