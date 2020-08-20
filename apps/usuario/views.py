@@ -24,13 +24,14 @@ def inicio(request):
 	#if request.user.is_authenticated() == False:
 	#	return redirect('login')
 
-	from django.db.models import Q
+	from django.db.models import Count, Q
 
-	#numero_proyectos = Proyecto.objects.filter(Q(creador= request.user) | Q(miembros=request.user)).distinct().count()
-	numero_proyectos = Proyecto.objects.count()
-	numero_historias = Historia.objects.all().count()
-	numero_historias_sin_estimar = Historia.objects.filter(estado="Sin estimar").count()
-	numero_historias_estimadas = Historia.objects.filter(estado="Estimada").count()
+	proyectos = Proyecto.objects.filter(Q(creador= request.user) | Q(miembros=request.user)).distinct()
+	historias = proyectos_con_historias = Proyecto.objects.annotate(numero_historias=Count("historias_del_proyecto")).filter(Q(creador= request.user) | Q(miembros=request.user)).filter(numero_historias__gt=0)
+	numero_proyectos = proyectos.count()
+	numero_historias = historias.count()
+	numero_historias_sin_estimar = historias.filter(estado="Sin estimar").count()
+	numero_historias_estimadas = historias.filter(estado="Estimada").count()
 
 	contexto = {
         'numero_proyectos': numero_proyectos,

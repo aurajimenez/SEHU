@@ -60,6 +60,10 @@ class Historia(models.Model):
 		self.estimacionHU = estimacionTotal/vez
 		print (estimacionTotal)
 
+	def obtener_proyecto(self):
+		proyecto = self.historia.proyecto
+		return proyecto
+
 
 class Criterio_Aceptacion(models.Model):
 	descripcion = models.CharField(max_length= 500)
