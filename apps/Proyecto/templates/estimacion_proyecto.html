@@ -47,7 +47,7 @@
                                     </div>
 
                                         
-                                <p><b>Manager:</b> {{proyecto.creador|upper}}</p> 
+                                <p><b>{{proyecto.creador|upper}}</b> </p> 
                                 </header>
                                 </div>
                                 </td>
@@ -62,6 +62,9 @@
                             </tbody>
                         </table>
                     </div>
+                    {% if not proyecto.historias_del_proyecto.all %}  
+                    <h3>No hay Historias de Usuario</h3>                 
+                    {% else %}
 
                     <div class="table-responsive">
                         <table class="table">
@@ -90,6 +93,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
