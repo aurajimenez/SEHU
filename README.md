@@ -1,6 +1,6 @@
 # SEHU
 
-SEHU is a web application developed in framework Django which allows to management and estimate software projects with agile methodologics.
+SEHU is a web application developed in framework Django which allows to management and estimate user stories with agile methodologics.
 
 ### Screenshot
 
@@ -8,29 +8,30 @@ SEHU is a web application developed in framework Django which allows to manageme
 
 # Features
 
-1. Register user.
-2. Register projects.
-3. Register user stories.
+1. Management users.
+2. Management projects.
+3. Management user stories.
 4. Estimate user stories.
 
-# Historias de Usuario
+# User Stories
 | ID | Nombre | Descripción |
 |--|-----|------|
-| HU1| Registrar integrante| d |
-| HU2| Modificar integrante| d |
-| HU3| Listar integrantes| d |
-| HU4| Visualizar integrante| d |
-| HU5| Cambiar estado de integrante| d |
-| HU6| Registrar proyecto| d |
-| HU7| Modificar proyecto| d |
-| HU8| Listar proyectos| d |
-| HU9| Visualizar proyecto| d |
-| HU10| Cambiar estado del proyecto| d |
-| HU11| Registrar HU del proyecto| d |
-| HU12| Modificar HU del proyecto| d |
-| HU13| Listar HUs del proyecto| d |
-| HU14| Registrar estimación de la HU| d |
-| HU15| Visualizar estimación final de la HU| d |
-| HU16| Realizar la estimación del grado de complejidad del proyecto| d |
-| HU17| Reporte de la estimación total del proyecto| d |
-| HU18| Reporte desviación de las estimaciones individuales respecto al promedio| d |
+| 01| Register user | d |
+| 02| Edit user | d |
+| 03| Lists users | d |
+| 04| Profile user | d |
+| 05| Cambiar estado de integrante| d |
+| 06| Register Project | d |
+| 07| Edit Project | d |
+| 08| Lists Projects | d |
+| 09| Profile Project | d |
+| 10| Cambiar estado del proyecto| d |
+| 11| Register US | d |
+| 12| Edit US | d |
+| 13| Lists USs | d |
+| 14| Profile US | d |
+| 15| Registrar estimación de la US | d |
+| 16| Visualizar estimación final de la US | d |
+| 17| Realizar la estimación del grado de complejidad del proyecto| d |
+| 18| Reporte de la estimación total del proyecto| d |
+| 19| Reporte desviación de las estimaciones individuales respecto al promedio| d |
