@@ -24,21 +24,38 @@ def inicio(request):
 	#if request.user.is_authenticated() == False:
 	#	return redirect('login')
 
-	from django.db.models import Count, Q
+	if request.user.is_superuser == True:
 
-	proyectos = Proyecto.objects.filter(Q(creador= request.user) | Q(miembros=request.user)).distinct()
-	historias = proyectos_con_historias = Proyecto.objects.annotate(numero_historias=Count("historias_del_proyecto")).filter(Q(creador= request.user) | Q(miembros=request.user)).filter(numero_historias__gt=0)
-	numero_proyectos = proyectos.count()
-	numero_historias = historias.count()
-	numero_historias_sin_estimar = historias.filter(estado="Sin estimar").count()
-	numero_historias_estimadas = historias.filter(estado="Estimada").count()
+		managers = Usuario.objects.filter(cargo="Integrante").count()
+		integrantes = Usuario.objects.filter(cargo="Manager").count()
+		usuarios_activos = Usuario.objects.filter(is_active=True).count()
+		usuarios_inactivos = Usuario.objects.filter(is_active=False).count()
 
-	contexto = {
-        'numero_proyectos': numero_proyectos,
-        'numero_historias': numero_historias,
-        'numero_historias_estimadas': numero_historias_estimadas,
-        'numero_historias_sin_estimar': numero_historias_sin_estimar,
-   	}
+		contexto = {
+	        'managers': managers,
+	        'integrantes': integrantes,
+	        'usuarios_activos': usuarios_activos,
+	        'usuarios_inactivos': usuarios_inactivos,
+	   	}
+	else:
+
+		from django.db.models import Count, Q
+
+		proyectos = Proyecto.objects.filter(Q(creador= request.user) | Q(miembros=request.user)).distinct()
+		#proyectos = Proyecto.objects.all()
+		historias = proyectos_con_historias = Proyecto.objects.annotate(numero_historias=Count("historias_del_proyecto")).filter(Q(creador= request.user) | Q(miembros=request.user)).filter(numero_historias__gt=0)
+		#historias = Historia.objects.all()
+		numero_proyectos = proyectos.count()
+		numero_historias = historias.count()
+		numero_historias_sin_estimar = historias.filter(estado="Sin estimar").count()
+		numero_historias_estimadas = historias.filter(estado="Estimada").count()
+
+		contexto = {
+	        'numero_proyectos': numero_proyectos,
+	        'numero_historias': numero_historias,
+	        'numero_historias_estimadas': numero_historias_estimadas,
+	        'numero_historias_sin_estimar': numero_historias_sin_estimar,
+	   	}
 
 	return render(request, "inicio.html", contexto)
 

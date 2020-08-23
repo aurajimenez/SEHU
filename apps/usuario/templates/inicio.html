@@ -7,62 +7,121 @@
 {% endblock titulo %}
 
 {% block contenido %}
-    <div class="container-fluid" >
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card bg-primary p-20">
-                    <div class="media widget-ten">
-                        <div class="media-left meida media-middle">
-                            <span><i class="ti-layers-alt f-s-40"></i></span>
-                        </div>
-                        <div class="media-body media-text-right">
-                            <h2 class="color-white">Proyectos registrados</h2>
-                            <p class="m-b-0">{{numero_proyectos}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-pink p-20">
-                    <div class="media widget-ten">
-                        <div class="media-left meida media-middle">
-                            <span><i class="ti-layout-cta-left f-s-40"></i></span>
-                        </div>
-                        <div class="media-body media-text-right">
-                            <h2 class="color-white">Historias registradas</h2>
-                            <p class="m-b-0">{{numero_historias}}</p>
+    {% if request.user.is_superuser != True %}
+        <div class="container-fluid" >
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card bg-primary p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-layers-alt f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Proyectos registrados</h2>
+                                <p class="m-b-0">{{numero_proyectos}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-success p-20">
-                    <div class="media widget-ten">
-                        <div class="media-left meida media-middle">
-                            <span><i class=" ti-check-box f-s-40"></i></span>
-                        </div>
-                        <div class="media-body media-text-right">
-                            <h2 class="color-white">Historias estimadas</h2>
-                            <p class="m-b-0">{{numero_historias_estimadas}}</p>
+                <div class="col-md-3">
+                    <div class="card bg-pink p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-layout-cta-left f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Historias registradas</h2>
+                                <p class="m-b-0">{{numero_historias}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-danger p-20">
-                    <div class="media widget-ten">
-                        <div class="media-left meida media-middle">
-                            <span><i class="ti-file f-s-40"></i></span>
+                <div class="col-md-3">
+                    <div class="card bg-success p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class=" ti-check-box f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Historias estimadas</h2>
+                                <p class="m-b-0">{{numero_historias_estimadas}}</p>
+                            </div>
                         </div>
-                        <div class="media-body media-text-right">
-                            <h2 class="color-white">Historias sin estimar</h2>
-                            <p class="m-b-0">{{numero_historias_sin_estimar}}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-danger p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-file f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Historias sin estimar</h2>
+                                <p class="m-b-0">{{numero_historias_sin_estimar}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="container-fluid" >
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card bg-primary p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-user f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Managers</h2>
+                                <p class="m-b-0">{{managers}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-pink p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-user f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Integrantes</h2>
+                                <p class="m-b-0">{{integrantes}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-user f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Usuarios activos</h2>
+                                <p class="m-b-0">{{usuarios_activos}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-danger p-20">
+                        <div class="media widget-ten">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-user f-s-40"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h2 class="color-white">Usuarios inactivos</h2>
+                                <p class="m-b-0">{{usuarios_inactivos}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
            
 <!-- Calendario -->
     <div class="col-lg-6 offset-3">
