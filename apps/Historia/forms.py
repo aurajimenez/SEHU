@@ -89,7 +89,6 @@ class EstimarHistoriaForm(forms.ModelForm):
 		self.fields['logs'].required = True
 		self.fields['porcentaje_reutilizacion'].required = True
 
-
 	class Meta:
 		model = Estimacion
 		fields = ('requiereBK','requiereUI','uso_framework','diseno_responsive','diseno_desarrollo_peticiones_asincronas','usoORM',

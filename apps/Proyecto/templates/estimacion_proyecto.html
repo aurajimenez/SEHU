@@ -3,10 +3,11 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-{% block titulo %} Estimación de proyectos {% endblock titulo %}
+{% block titulo %} 
+    Estimación de proyectos 
+{% endblock titulo %}
 
 {% block panel_navegacion %}
-
 {% endblock %}
 
 {% block contenido %}
@@ -19,87 +20,80 @@
     </div>
 </div>
 
-{% if not estimacion_proyecto %}
-<div>
-    <h3 align="center">No hay estimaciones registradas</h3>   
-</div>
+    {% if not estimacion_proyecto %}
+        <div>
+            <h3 align="center">No hay estimaciones registradas</h3>   
+        </div>
 
-{% else %}
-<div class="container-fluid" >
-    <div class="row">
+    {% else %}
+        <div class="container-fluid" >
+            <div class="row">
+                {% for proyecto in estimacion_proyecto %}
+                    <div class="col-md-12">
+                        <div class="card bg-light p-12">  
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table" style="width:70%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="card-two">
+                                                        <header>
+                                                            <div class="avatar">
+                                                                <img src="{% if proyecto.creador.foto_perfil %} {{ MEDIA_URL }}{{ proyecto.creador.foto_perfil }}
+                                                                {% else %}
+                                                                {% static 'images/users/2.jpg' %}
+                                                                {% endif %}">
+                                                            </div>
+                                                            <p><b>{{proyecto.creador|upper}}</b> </p> 
+                                                        </header>
+                                                    </div>
+                                                </td>
 
-        {% for proyecto in estimacion_proyecto %}
-        <div class="col-md-12">
-            <div class="card bg-light p-12">  
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table" style="width:70%">
-                            <tbody>
-                            <tr>
-                                <td>
-                                <div class="card-two">
-                                <header>
-                                    <div class="avatar">
-                                        <img src="{% if proyecto.creador.foto_perfil %} {{ MEDIA_URL }}{{ proyecto.creador.foto_perfil }}
-                                        {% else %}
-                                        {% static 'images/users/2.jpg' %}
-                                        {% endif %}">
-                                    </div>
-
-                                        
-                                <p><b>{{proyecto.creador|upper}}</b> </p> 
-                                </header>
+                                                <td>
+                                                    <div class="card-two">
+                                                        <h3>{{proyecto.nombre|upper}} </h3>
+                                                        <p align="center">Del {{proyecto.fecha_inicio|date:"d-m-Y"}} al {{proyecto.fecha_fin|date:"d-m-Y"}}</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                </td>
 
-                                <td>
-                                    <div class="card-two">
-                                        <h3>{{proyecto.nombre|upper}} </h3>
-                                        <p align="center">Del {{proyecto.fecha_inicio|date:"d-m-Y"}} al {{proyecto.fecha_fin|date:"d-m-Y"}}</p>
+                                {% if not proyecto.historias_del_proyecto.all %}  
+                                    <h3>No hay Historias de Usuario</h3> 
+
+                                {% else %}
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Puntos</th>
+                                                    <th>Prioridad</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for historia in proyecto.historias_del_proyecto.all %}
+                                                    <tr>
+                                                        <td class="color-primary">{{ historia.identificador|upper}}</td>
+                                                        <td>{{ historia.estimacionHU|floatformat:1}}</td>
+                                                        <td>{{ historia.prioridad|floatformat:1}}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                <tr>
+                                                    <td><b>Puntos del proyecto:</b> {{ proyecto.total_esfuerzo_horas}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    {% if not proyecto.historias_del_proyecto.all %}  
-                    <h3>No hay Historias de Usuario</h3>                 
-                    {% else %}
-
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Puntos</th>
-                                    <th>Prioridad</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                            {% for historia in proyecto.historias_del_proyecto.all %}
-                                <tr>
-                                    <td class="color-primary">{{ historia.identificador|upper}}</td>
-                                    <td>{{ historia.estimacionHU|floatformat:1}}</td>
-                                    <td>{{ historia.prioridad|floatformat:1}}</td>
-                                </tr>
-                            {% endfor %}
-                                <tr>
-                                    <td><b>Puntos del proyecto:</b> {{ proyecto.total_esfuerzo_horas}}</td>
-                                </tr>
-
-                            
-                            </tbody>
-                        </table>
-                    </div>
-                    {% endif %}
-                </div>
+                {% endfor %} 
             </div>
         </div>
-        {% endfor %} 
-    </div>
-    </div>
-</div>
-{% endif %}
+    {% endif %}
 {% endblock contenido %}

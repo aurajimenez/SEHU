@@ -10,7 +10,6 @@ from historias_usuario.utilidades import verificar_cargo
 
 import math
 
-
 class TaggedProyecto(TaggedItemBase):
 	content_object = models.ForeignKey('Proyecto',on_delete=models.CASCADE,)
 
@@ -32,7 +31,7 @@ class Proyecto(models.Model):
 		('60% - 80%', '60% - 80%'),
 		('40% - 60%','40% - 60%'),
 		('20% - 40%','20% - 40%'),
-	)
+		)
 
 	GRADOS1 = (
 		('AUMENTA', 'AUMENTA'),
@@ -50,21 +49,21 @@ class Proyecto(models.Model):
 		('Senior', 'Senior'),
 		('Semisenior', 'Semisenior'),
 		('Junior', 'Junior'),
-	)
+		)
 
 	nombre = models.CharField(max_length=200, verbose_name="Nombre", unique=True)
 	miembros = models.ManyToManyField(Usuario, related_name="miembros")
-	fecha_inicio = models.DateField(verbose_name= "Fecha de inicio", blank=False,null=False,)
-	fecha_fin = models.DateField(verbose_name= "Fecha de finalización", blank=True, null=True)
+	fecha_inicio = models.DateField(verbose_name="Fecha de inicio", blank=False, null=False,)
+	fecha_fin = models.DateField(verbose_name="Fecha de finalización", blank=True, null=True)
 	tecnologias = TaggableManager(through=TaggedProyecto, help_text="Una lista de tecnologías separadas por comas.")
-	enfoque = models.CharField(max_length= 100, verbose_name="Enfoque del proyecto", help_text="Ejemplo: Desarrollo")
-	area = models.CharField(max_length= 100, verbose_name= "Área a la que pertenece el proyecto", help_text=" Ejemplo: Salud, Deporte, Gobierno, etc")
+	enfoque = models.CharField(max_length=100, verbose_name="Enfoque del proyecto", help_text="Ejemplo: Desarrollo")
+	area = models.CharField(max_length=100, verbose_name= "Área a la que pertenece el proyecto", help_text="Ejemplo: Salud, Deporte, Gobierno, etc")
 	tipo = models.CharField(max_length=100, verbose_name="Tipo de proyecto", help_text="Ejemplo: Web, Móvil, Hibrido")
 	descripcion = models.TextField(verbose_name="Descripción")
 	creador = models.ForeignKey(Usuario, related_name="creador",on_delete=models.CASCADE,)
-	estado = models.CharField(max_length=100,choices=ESTADOS, default="Sin estimar")
-	equivalente_puntos_hora = models.FloatField(max_length= 50, null= True, default=0)
-	total_esfuerzo_horas = models.FloatField(max_length= 50, null= True, default= 0)
+	estado = models.CharField(max_length=100, choices=ESTADOS, default="Sin estimar")
+	equivalente_puntos_hora = models.FloatField(max_length=50, null=True, default=0)
+	total_esfuerzo_horas = models.FloatField(max_length=50, null=True, default=0)
 
 	# variables de estimacion
 	#proyecto_unico = models.CharField(max_length= 50,choices=GRADOS1)
@@ -78,8 +77,6 @@ class Proyecto(models.Model):
 		total_esfuerzo_horas = listar_historias.estimacionHU*equivalente_puntos_hora
 		self.total_esfuerzo_horas = total_esfuerzo_horas
 		print (total_esfuerzo_horas)
-
-
 
 	def __str__(self):
 		return self.nombre
@@ -110,7 +107,7 @@ class ComplejidadDelProyecto(models.Model):
 		('Senior', 'Senior'),
 		('Semisenior', 'Semisenior'),
 		('Junior', 'Junior'),
-	)
+		)
 
 	OPCIONES = (
 		('Si','Si'),
@@ -122,16 +119,16 @@ class ComplejidadDelProyecto(models.Model):
 		('60% - 80%', '60% - 80%'),
 		('40% - 60%','40% - 60%'),
 		('20% - 40%','20% - 40%'),
-	)
+		)
 
 	usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,)
 	proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE,)
 
-	proyecto_unico = models.CharField(max_length= 50,choices=GRADOS1)
-	conocimiento_tecnologias = models.CharField(max_length= 50, choices= OPCIONES)
-	grado_acierto_estimar = models.CharField(max_length= 50, choices= PORCENTAJES)
-	experiencia_estimador = models.CharField(max_length= 500, choices= EXPERIENCIAS)
-	sumatoria = models.FloatField(max_length= 50, null= True, default=0)
+	proyecto_unico = models.CharField(max_length=50, choices=GRADOS1)
+	conocimiento_tecnologias = models.CharField(max_length=50, choices=OPCIONES)
+	grado_acierto_estimar = models.CharField(max_length=50, choices=PORCENTAJES)
+	experiencia_estimador = models.CharField(max_length=500, choices=EXPERIENCIAS)
+	sumatoria = models.FloatField(max_length=50, null=True, default=0)
 
 	class Meta:
 		unique_together = (("usuario", "proyecto"),)

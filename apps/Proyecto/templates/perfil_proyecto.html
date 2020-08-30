@@ -3,8 +3,8 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-
-{% block titulo %} Proyecto  
+{% block titulo %} 
+    Proyecto  
 {% endblock titulo %}
 
 {% block panel_navegacion %}
@@ -19,14 +19,10 @@
                 <strong class="card-title" v-if="headerText">
                     <p align="center">{{proyecto.nombre|upper}}</p>
                 </strong>
-
                 {% if proyecto.creador == user %}
-
                     <a href="{% url 'modificar_proyecto' proyecto.id %}" >
                     <i class="fa fa-pencil-square" style="font-size:36px;color:gray"></i></a>
-
                 {% endif %}
-
             </div>
             <br>
             <div class="card-body ">
@@ -34,16 +30,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h4 align="center"><b>Características</b></h4>
-                            <p><b>Tecnologías</b>: {{proyecto.tecnologias.all|join:", "}}</p>
-                            <p><b>Enfoque</b>: {{proyecto.enfoque}}</p>
-                            <p><b>Área del proyecto</b>: {{proyecto.area}}</p>
-                            <p><b>Tipo de proyecto</b>: {{proyecto.tipo}}</p>
+                                <p><b>Tecnologías</b>: {{proyecto.tecnologias.all|join:", "}}</p>
+                                <p><b>Enfoque</b>: {{proyecto.enfoque}}</p>
+                                <p><b>Área del proyecto</b>: {{proyecto.area}}</p>
+                                <p><b>Tipo de proyecto</b>: {{proyecto.tipo}}</p>
 
                             {% if proyecto.estado == "Sin estimar" %}
-
                                 <p><b>Complejidad</b>: Sin definir </p> 
                                 <br>
-
                             {% endif %}
 
                         </div>
@@ -51,7 +45,7 @@
                         <div class="col-md-6">
                             <div class="desc">
                                 <h4 id="titulo-negrita" align="center"><b> Integrantes</b></h4>
-                                <p align="center"><i class="fa fa-users" style="font-size:24px;color:gray"></i> {{ proyecto.miembros.all|join:", " }}</p>
+                                    <p align="center"><i class="fa fa-users" style="font-size:24px;color:gray"></i> {{ proyecto.miembros.all|join:", " }}</p>
                             </div>
                         </div>
                     </div>
@@ -60,10 +54,9 @@
                         <br>
                         <button type="submit" class="btn btn-success">
                             <a href="{% url 'estimar_proyecto' proyecto.id %}">
-                            Definir complejidad proyecto
+                                Definir complejidad proyecto
                             </a>
                         </button>
-
                     </div>  
                 </div>                    
             </div>  
@@ -88,43 +81,42 @@
 
                 {% else %}
 
-                <div class="row">
+                    <div class="row">
 
-                    {% for historia in listar_historias %}
-                        {% if historia.estimacionHU != 0 %}
-                        <div class="col-md-4">
-                            <div class="card bg-info1 p-20">
-                                <h4 class="text-dark" align="center">
-                                    <a href="{% url 'perfil_historia' historia.id %}">
-                                    {{ historia.identificador|upper}} - {{ historia.nombre|upper}}
-                                    </a>
-                                </h4>
-                                 
+                        {% for historia in listar_historias %}
+                            {% if historia.estimacionHU != 0 %}
+                            <div class="col-md-4">
+                                <div class="card bg-info1 p-20">
+                                    <h4 class="text-dark" align="center">
+                                        <a href="{% url 'perfil_historia' historia.id %}">
+                                        {{ historia.identificador|upper}} - {{ historia.nombre|upper}}
+                                        </a>
+                                    </h4>
+                                     
+                                </div>
                             </div>
-                        </div>
-                        {% endif %}
-                        {% if historia.estimacionHU == 0 %}
-                        <div class="col-md-4">
-                            <div class="card bg-danger1 p-20">
-                                <h4 class="text-dark" align="center">
-                                    <a href="{% url 'perfil_historia' historia.id %}">
-                                    {{ historia.identificador|upper}} - {{ historia.nombre|upper}}
-                                    </a>
-                                </h4>
-                                 
+                            {% endif %}
+                            {% if historia.estimacionHU == 0 %}
+                            <div class="col-md-4">
+                                <div class="card bg-danger1 p-20">
+                                    <h4 class="text-dark" align="center">
+                                        <a href="{% url 'perfil_historia' historia.id %}">
+                                        {{ historia.identificador|upper}} - {{ historia.nombre|upper}}
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>                      
+                            {% endif %}
+                        {% endfor %}
+                        {% if user.cargo == "Manager" %}
+                            <div class="col-md-4 ">
+                                <div class="card bg-white">
+                                    <h4 class="text-dark" align="center">
+                                        <a href="{% url 'historia_crear' proyecto.id %}">Registrar nueva HU </a><i class="fa fa-plus" style="font-size:24px;color:gray"></i>
+                                </div>
                             </div>
-                        </div>                      
                         {% endif %}
-                    {% endfor %}
-                    {% if user.cargo == "Manager" %}
-                    <div class="col-md-4 ">
-                        <div class="card bg-white">
-                            <h4 class="text-dark" align="center">
-                            <a href="{% url 'historia_crear' proyecto.id %}">Registrar nueva HU  </a><i class="fa fa-plus" style="font-size:24px;color:gray"></i>
-                        </div>
                     </div>
-                    {% endif %}
-                </div>
                 {% endif %}
             </div>
         </div>

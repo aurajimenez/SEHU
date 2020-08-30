@@ -1,4 +1,3 @@
-
 from django import forms
 import datetime
 from django.utils import timezone
@@ -7,10 +6,7 @@ from django_select2.forms import Select2MultipleWidget
 from datetimewidget.widgets import DateWidget
 from datetimewidget.widgets import DateTimeWidget
 from historias_usuario.utilidades import MyDateWidget, MyTimeWidget
-
-
 from .models import *
-
 
 OPCIONES = (
 	('Si','Si'),
@@ -30,7 +26,6 @@ class CrearProyectoForm(forms.ModelForm):
 		self.fields['fecha_fin'].SelectDateWidget = 'Fecha finalización'
 		self.fields['fecha_inicio'].SelectDateWidget = 'Fecha inicio'
 		self.fields['equivalente_puntos_hora'].label = 'Equivalente puntos - hora'
-
 
 		self.fields['nombre'].required = True
 		self.fields['tecnologias'].required = True
@@ -110,8 +105,7 @@ class EstimarProyectoForm(forms.ModelForm):
 		self.fields['conocimiento_tecnologias'].label = '¿Tiene conocimiento previo de las tecnologías del proyecto?'
 		self.fields['grado_acierto_estimar'].label = '¿Cuál considera ha sido su grado de acierto en pasadas estimaciones?'
 		self.fields['experiencia_estimador'].label = '¿Cuál es su grado de experiencia en el ciclo de vida de un proyecto?'
-		#proyecto_unico = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=OPCIONES)
-
+		
 		self.fields['proyecto_unico'].required = True
 		self.fields['conocimiento_tecnologias'].required = True
 		self.fields['grado_acierto_estimar'].required = True

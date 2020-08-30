@@ -9,29 +9,27 @@
 {% endblock titulo %}
 
 {% block panel_navegacion %}
-
 {% endblock panel_navegacion%}
 
 {% block contenido %}
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">Historias</h3> </div>
+            <h3 class="text-primary">Historias</h3> 
+        </div>
         <div class="col-md-7 align-self-center">
-            <ol class="breadcrumb">
-            </ol>
+            <ol class="breadcrumb"></ol>
         </div>
     </div>
 
-{% if  not proyectos_con_historias %}
+    {% if not proyectos_con_historias %}
         <div>
             <h3 align="center">No hay Historias de Usuario registradas</h3>   
         </div>
-{% else %}
-    {% for proyecto in proyectos_con_historias %}
-        <h3 align="center">{{proyecto.nombre|upper}}</h3>
-
-        <div class="container-fluid" >
-            <div class="row">
+    {% else %}
+        {% for proyecto in proyectos_con_historias %}
+            <h3 align="center">{{proyecto.nombre|upper}}</h3>
+            <div class="container-fluid">
+                <div class="row">
                 {% for historia in proyecto.historias_del_proyecto.all %}
                     <div class="col-md-4">
                         {% if historia.estado == "Estimada" %}
@@ -50,7 +48,7 @@
                             <div class="card bg-danger1 p-20">
                                 <div class="card-body">
                                     <div class="card-two">
-                                        <h3>{{historia.nombre |upper}} </h3>
+                                        <h3>{{historia.nombre |upper}}</h3>
                                         <p class="text-dark" align="center">{{historia.identificador}}</p>
                                         <div class="contacts" >
                                             <a href="{% url 'perfil_historia' historia.id %}"><i class="fa fa-plus" ></i></a>
@@ -61,8 +59,8 @@
                         {% endif %}
                     </div>
                 {% endfor %}
+                </div>
             </div>
-        </div>
-    {% endfor %}
-  {% endif %}   
+        {% endfor %}
+    {% endif %}   
 {% endblock  %}

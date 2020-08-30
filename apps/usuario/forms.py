@@ -29,7 +29,6 @@ class CrearUsuarioForm(UserCreationForm):
     password1 = forms.CharField(max_length=30, required=True, label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(max_length=30, required=True, label="Confirmación de contraseña", widget=forms.PasswordInput)
 
-
     class Meta:
         model = Usuario
         fields = ('username', 'first_name','last_name','email','cargo','skills','enfoque','foto_perfil')

@@ -69,12 +69,10 @@ def estimarHistoria(request, id_historia):
 			estimacion.estimador = request.user
 			estimacion.historiaHH = historia
 			estimacion.calculo_estimacion()
-			
 			estimacion.save()
 			historia.estado = "Estimada"
 			historia.promedio_estimacion(id_historia)
 			historia.save()
-
 			messages.success(request, "La historia ha sido estimada correctamente")
 			return redirect('listar_historias')
 		messages.error(request, "Error al estimar la historia")
@@ -85,7 +83,6 @@ def estimarHistoria(request, id_historia):
 @verificar_cargo(cargos_permitidos=["Manager", "Integrante"])
 def criteriosHistoria(request, id_historia):
 	historia = Historia.revisar_existencia_historia(id_historia)
-	#proyecto = Proyecto.objects.get(id_proyecto)
 	
 	if not historia:
 		messages.error(request, "Error al modificar la historia")

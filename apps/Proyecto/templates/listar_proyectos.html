@@ -9,7 +9,6 @@
 {% endblock titulo %}
 
 {% block panel_navegacion %}
-
 {% endblock %}
 
 {% block contenido %}
@@ -27,41 +26,40 @@
             <h3 align="center">No hay Proyectos registrados</h3>   
         </div>
     {% else %}
-            <div class="container-fluid" >
+        <div class="container-fluid" >
             <div class="row">
-            {% for proyecto in listar_proyectos %}
-                <div class="col-md-4">
-            {% if proyecto.estado == "Estimada" %}
+                {% for proyecto in listar_proyectos %}
+                    <div class="col-md-4">
+                        {% if proyecto.estado == "Estimada" %}
                             <div class="card bg-info1 p-20">
                                 <div class="card-body">
                                     <div class="card-two">
-                                        <h3>{{proyecto.nombre|upper}} </h3>
+                                        <h3>{{proyecto.nombre|upper}}</h3>
                                         <p>Estimado: {{proyecto.sumatoria}}</p>
                                         <div class="contacts" >
                                             <a href="{% url 'perfil_proyecto' proyecto.id %}">
-                                            <i class="fa fa-plus-circle" style="font-size:36px;color:blue" ></i>
+                                                <i class="fa fa-plus-circle" style="font-size:36px;color:blue" ></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        {%  else %}
-                            <div class="card bg-danger1 p-4">
-                                <div class="card-body">
-                                    <div class="card-two">
-                                    <h3>{{proyecto.nombre|upper}} </h3>
-                                    
-                                        <div class="contacts" >
-                                            <a href="{% url 'perfil_proyecto' proyecto.id %}">
-                                            <i class="fa fa-plus" ></i>
-                                            </a>
+                            {%  else %}
+                                <div class="card bg-danger1 p-4">
+                                    <div class="card-body">
+                                        <div class="card-two">
+                                            <h3>{{proyecto.nombre|upper}} </h3>
+                                            <div class="contacts" >
+                                                <a href="{% url 'perfil_proyecto' proyecto.id %}">
+                                                    <i class="fa fa-plus" ></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         {% endif %}
                     </div>
-            {% endfor %}  
+                {% endfor %}  
             </div>
         </div>
     {% endif %}

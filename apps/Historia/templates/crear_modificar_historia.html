@@ -3,8 +3,9 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-
-{% block titulo %} Registrar historia {% endblock titulo %}
+{% block titulo %} 
+    Registrar historia 
+{% endblock titulo %}
 
 
 {% block contenido %}
@@ -27,8 +28,9 @@
                     <div class="form-validation">
                         <form class="form-valide" enctype="multipart/form-data" action="" method="post" novalidate="novalidate">
                             {% csrf_token %}
-                            <div class="col-md-12 col-sm-12 ">{% for campo in form %}
-                                {% bootstrap_field campo layout='horizontal' %}
+                            <div class="col-md-12 col-sm-12 ">
+                                {% for campo in form %}
+                                    {% bootstrap_field campo layout='horizontal' %}
                                 {% endfor %}
                             </div>
                             <div class="form-group row">
@@ -45,6 +47,5 @@
     </div>
 </div>
 <!-- End PAge Content -->
-</div>
 {% endblock contenido %}
 

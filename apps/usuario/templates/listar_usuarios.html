@@ -3,7 +3,9 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-{% block titulo %} Integrantes {% endblock titulo %}
+{% block titulo %} 
+    Integrantes 
+{% endblock titulo %}
 
 {% block contenido %}
     <div class="row page-titles">
@@ -11,34 +13,33 @@
             <h3 class="text-primary">Integrantes</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
-
             </ol>
         </div>
     </div>
-{% for miembro in listar_usuarios %}
-    {% if miembro != request.user %}
-        <div class="col-lg-6 offset-lg-3" >           
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-two">
-                        <header>
-                        <div class="avatar">
-                            <img src="{% if miembro.foto_perfil %} {{ MEDIA_URL }}{{ miembro.foto_perfil }}
-                            {% else %}
-                            {% static 'images/users/2.jpg' %}
-                            {% endif %}">
-                        </header>
+    {% for miembro in listar_usuarios %}
+        {% if miembro != request.user %}
+            <div class="col-lg-6 offset-lg-3" >           
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-two">
+                            <header>
+                            <div class="avatar">
+                                <img src="{% if miembro.foto_perfil %} {{ MEDIA_URL }}{{ miembro.foto_perfil }}
+                                {% else %}
+                                {% static 'images/users/2.jpg' %}
+                                {% endif %}">
+                            </header>
 
-                        <h3>{{miembro.first_name}} {{miembro.last_name}}</h3>
-                        <p align="center"> {{miembro.cargo}} - {{miembro.enfoque}}</p>
-                        <div class="contacts" >
-                            <a href="{% url 'perfil_usuario' miembro.id %}"><i class="fa fa-plus-circle" style="font-size:36px;color:green" ></i></a>
+                            <h3>{{miembro.first_name}} {{miembro.last_name}}</h3>
+                            <p align="center"> {{miembro.cargo}} - {{miembro.enfoque}}</p>
+                            <div class="contacts" >
+                                <a href="{% url 'perfil_usuario' miembro.id %}"><i class="fa fa-plus-circle" style="font-size:36px;color:green" ></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 
 {% endblock contenido %}

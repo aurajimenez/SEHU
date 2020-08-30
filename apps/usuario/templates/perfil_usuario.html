@@ -3,13 +3,11 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-
 {% block titulo %} 
     Perfil  
 {% endblock titulo %}
 
 {% block panel_navegacion %}
-
 {% endblock %}
 
 {% block js_propios %}
@@ -27,74 +25,69 @@
 
     </script>
 {% endblock js_propios %}
+
 {% block contenido %}
-
 <!-- PERFIL DE USUARIO -->
-
-<div class="container-fluid" >
-                <!-- Start Page Content -->
-    <div class="row" >
-                    <!-- Column -->
-        <div class="col-lg-6 offset-lg-3" >
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-two">
-                        <header>
-                            <div class="avatar">
-                                <img src="{% if usuario.foto_perfil %} {{ MEDIA_URL }}{{ usuario.foto_perfil }}
-                                {% else %}
-                                {% static 'images/users/2.jpg' %}
-                                {% endif %}" alt="Foto usuario" >
-                            </div>
-                            
-                        </header>
-                            
-                        <h3>{{usuario.first_name}} {{usuario.last_name}}</h3> 
-                        <p align="center">{{usuario.cargo}}</p>                            
-                        <div class="desc">
-                            {% if user.cargo == "Administrador" or user == usuario %}
-                            <button type="submit" class="btn btn-success" ><a href="{% url 'usuario_modificar' usuario.id %}">Modificar perfil</a>
-                            </button>
-                            {% endif %}
-
-                            {% if user.cargo == "Administrador"%}
-                            <a data-toggle="modal" data-target="#modal-confirmacion" href="#"
-                               data-url="{% if usuario.is_active %}
-                                            {% url 'inactivar_usuario' usuario.id %}
-                                        {% else %}
-                                            {% url 'activar_usuario' usuario.id %}
-                                        {% endif %}
-                                        "
-                               data-usuario-nombre="{{ usuario }}"
-                               data-usuario-username="{{ usuario.username }}"
-                               class="btn btn {% if usuario.is_active %}btn-danger
-                               {% else %}
-                               btn-success
-                               {% endif %} cambiar-estado" >
-                                {% if usuario.is_active %}
-                                    Desactivar usuario
-                                {% else %}
-                                    Activar usuario
+    <div class="container-fluid" >
+        <!-- Start Page Content -->
+        <div class="row" >
+            <!-- Column -->
+            <div class="col-lg-6 offset-lg-3" >
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-two">
+                            <header>
+                                <div class="avatar">
+                                    <img src="{% if usuario.foto_perfil %} {{ MEDIA_URL }}{{ usuario.foto_perfil }}
+                                    {% else %}
+                                    {% static 'images/users/2.jpg' %}
+                                    {% endif %}" alt="Foto usuario" >
+                                </div>
+                            </header>
+                                
+                            <h3>{{usuario.first_name}} {{usuario.last_name}}</h3> 
+                            <p align="center">{{usuario.cargo}}</p>                            
+                            <div class="desc">
+                                {% if user.cargo == "Administrador" or user == usuario %}
+                                    <button type="submit" class="btn btn-success" ><a href="{% url 'usuario_modificar' usuario.id %}">Modificar perfil</a>
+                                    </button>
                                 {% endif %}
-                            </a> 
 
-                            {% endif %}
-                            
-                            <h4><b>Acerca de mi</b></h4>
+                                {% if user.cargo == "Administrador"%}
+                                    <a data-toggle="modal" data-target="#modal-confirmacion" href="#"
+                                   data-url="{% if usuario.is_active %}
+                                                {% url 'inactivar_usuario' usuario.id %}
+                                            {% else %}
+                                                {% url 'activar_usuario' usuario.id %}
+                                            {% endif %}
+                                            "
+                                   data-usuario-nombre="{{ usuario }}"
+                                   data-usuario-username="{{ usuario.username }}"
+                                   class="btn btn {% if usuario.is_active %}btn-danger
+                                   {% else %}
+                                   btn-success
+                                   {% endif %} cambiar-estado" >
+                                    {% if usuario.is_active %}
+                                        Desactivar usuario
+                                    {% else %}
+                                        Activar usuario
+                                    {% endif %}
+                                    </a> 
 
-                            <p align="center">{{usuario.acerca_de_mi}}</p>
-                            <p align="center">{{usuario.skills.all|join:", "}}</p><hr>
-                            <p align="center">{{usuario.email}}</p>
-                            <p align="center">{{usuario.enfoque}}</p>
-
+                                {% endif %}
+                                    <h4><b>Acerca de mi</b></h4>
+                                    <p align="center">{{usuario.acerca_de_mi}}</p>
+                                    <p align="center">{{usuario.skills.all|join:", "}}</p><hr>
+                                    <p align="center">{{usuario.email}}</p>
+                                    <p align="center">{{usuario.enfoque}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+         <!-- End PAge Content -->
         </div>
-                <!-- End PAge Content -->
     </div>
-</div>
     <div class="modal inmodal" id="modal-confirmacion">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">

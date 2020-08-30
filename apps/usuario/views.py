@@ -14,9 +14,7 @@ from .models import Usuario
 from apps.Proyecto.models import Proyecto
 from apps.Historia.models import Historia
 from django.views.generic import FormView
-
 from .forms import CrearUsuarioForm, ModificarUsuarioForm
-
 
 def inicio(request):
 	Usuario.crear_usuario_inicial()
@@ -144,7 +142,7 @@ def listarUsuarios(request):
 def activar_usuario(request, id_usuario):
 	try:
 		usuario = Usuario.objects.get(id=id_usuario)
-		usuario.is_active= True
+		usuario.is_active=True
 		usuario.save()
 		messages.success(request, "El usuario ha sido activado correctamente")
 	except Usuario.DoesNotExist:
@@ -155,7 +153,7 @@ def activar_usuario(request, id_usuario):
 def inactivar_usuario(request, id_usuario):
 	try:
 		usuario = Usuario.objects.get(id=id_usuario)
-		usuario.is_active= False
+		usuario.is_active=False
 		usuario.save()
 		messages.success(request, "El usuario ha sido activado correctamente")
 	except Usuario.DoesNotExist:
@@ -166,7 +164,6 @@ def inactivar_usuario(request, id_usuario):
 def perfil_usuario(request, id_usuario):
 	from django.shortcuts import get_object_or_404
 	try:
-
 		usuario = get_object_or_404(Usuario, pk=id_usuario)
 		username =usuario.username
 		cargo = usuario.cargo
@@ -178,7 +175,7 @@ def perfil_usuario(request, id_usuario):
 		acerca_de_mi = usuario.acerca_de_mi
 
 		contexto = {
-			"usuario": usuario, # poner este solo
+			"usuario": usuario,
             }
 
 	except Usuario.DoesNotExist:
@@ -217,7 +214,6 @@ class Login(FormView):
 	def form_invalid(self, form):
 		messages.add_message(self.request, messages.ERROR, "El usuario  o la contraseña son incorrectos")
 		return super(Login, self).form_invalid(form)
-
 
 @login_required
 def Logout(request):

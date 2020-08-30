@@ -26,19 +26,16 @@ class Usuario(AbstractUser):
 		('CEO','CEO')
 		)
 
-	username = models.CharField(max_length= 20, verbose_name= "username", unique=True)
-	cargo = models.CharField(max_length= 50, choices= CARGOS)
+	username = models.CharField(max_length=20, verbose_name="username", unique=True)
+	cargo = models.CharField(max_length=50, choices=CARGOS)
 	foto_perfil = models.ImageField(upload_to=crear_ruta_foto_perfil, blank=True, help_text='Seleccione una imagen de perfil')
-	first_name = models.CharField(max_length= 200, verbose_name="Nombre", unique=False)
-	last_name = models.CharField(max_length= 200, verbose_name="Apellidos", unique=False)
-	email = models.CharField(max_length= 200, verbose_name="Correo electrónico", unique=True)
+	first_name = models.CharField(max_length=200, verbose_name="Nombre", unique=False)
+	last_name = models.CharField(max_length=200, verbose_name="Apellidos", unique=False)
+	email = models.CharField(max_length=200, verbose_name="Correo electrónico", unique=True)
 	is_active = models.BooleanField(default=True)
-	#fecha_nacimiento = models.DataField(verbose_name="Fecha nacimiento", blank=False, null=False)
 	skills = TaggableManager(through=TaggedUsuario, help_text="Una lista de skills separados por comas.")
-	enfoque = models.CharField(max_length= 20, choices= ENFOQUE)
-	#proyecto
-	#estimacion
-	acerca_de_mi = models.CharField(max_length= 500, verbose_name="Acerca de mi")
+	enfoque = models.CharField(max_length=20, choices= ENFOQUE)
+	acerca_de_mi = models.CharField(max_length=500, verbose_name="Acerca de mi")
 
 	@staticmethod
 	def crear_usuario_inicial():

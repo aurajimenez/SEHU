@@ -20,17 +20,14 @@ class Historia(models.Model):
 
 	nombre = models.CharField(max_length=200, verbose_name="Nombre")
 	identificador = models.CharField(max_length=10, verbose_name= "Identificador", help_text="Ejemplo: HU001")
-	estado = models.CharField(max_length= 50, choices= ESTADOS, default="Sin estimar")
-	quiero = models.CharField(verbose_name='quiero', max_length=1200)
-	para = models.CharField(verbose_name='para', max_length=1200)
-	#creador = models.ForeignKey(Usuario, related_name="creador")
-	actores = models.CharField(max_length= 500, verbose_name= "Actores")
-	quiero = models.TextField()
-	para = models.TextField()
+	estado = models.CharField(max_length=50, choices= ESTADOS, default="Sin estimar")
+	quiero = models.CharField(max_length=1200, verbose_name='quiero')
+	para = models.CharField(max_length=1200, verbose_name='para')
+	actores = models.CharField(max_length=500, verbose_name="Actores")
 	criterios_aceptacion = TaggableManager(through=TaggedHistoria, help_text="Criterios de aceptación")
 	proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, related_name="historias_del_proyecto")
-	estimacionHU = models.FloatField(max_length= 50, null= True, default= 0)
-	prioridad = models.IntegerField(null= True, default= 1)
+	estimacionHU = models.FloatField(max_length=50, null=True, default=0)
+	prioridad = models.IntegerField(null=True, default=1)
 
 	class Meta:
 		unique_together = (("identificador", "proyecto"))
@@ -49,15 +46,14 @@ class Historia(models.Model):
 
 	def promedio_estimacion(self, id_historia):
 		estimacionTotal = 0
-		vez = 0
-		#proyecto = Proyecto.objects.get(id=1)
+		numero_estimaciones_realizadas = 0
 		estimaciones = Estimacion.objects.filter(historiaHH__id=id_historia)
 
 		for estimacion in estimaciones:
 			estimacionTotal = estimacionTotal + estimacion.estimacionF
-			vez = vez + 1 
+			numero_estimaciones_realizadas = numero_estimaciones_realizadas + 1 
 			print ("Esta es la estimacion de toda la HU")
-		self.estimacionHU = estimacionTotal/vez
+		self.estimacionHU = estimacionTotal/numero_estimaciones_realizadas
 		print (estimacionTotal)
 
 	def obtener_proyecto(self):
@@ -66,7 +62,7 @@ class Historia(models.Model):
 
 
 class Criterio_Aceptacion(models.Model):
-	descripcion = models.CharField(max_length= 500)
+	descripcion = models.CharField(max_length=500)
 	historia = models.ForeignKey(Historia, on_delete= models.CASCADE)
 
 class Estimacion(models.Model):
@@ -76,26 +72,25 @@ class Estimacion(models.Model):
 		('No', 'No'),
 	)
 
-	porcentaje_reutilizacion = models.FloatField(max_length= 50, null= True, default=0)
-	estimacionF = models.FloatField(max_length= 50, null= True, default=0)
+	porcentaje_reutilizacion = models.FloatField(max_length=50, null=True, default=0)
+	estimacionF = models.FloatField(max_length=50, null=True, default=0)
 	estimador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-	uso_framework = models.CharField(max_length= 500, choices= OPCIONES)
+	uso_framework = models.CharField(max_length=500, choices=OPCIONES)
 	historiaHH = models.ForeignKey(Historia, on_delete=models.CASCADE,related_name="estimaciones_de_la_historia")
 	#Frontend
-	requiereUI = models.CharField(max_length= 500, choices= OPCIONES)
-	diseno_responsive = models.CharField(max_length= 500, choices= OPCIONES)
-	diseno_desarrollo_peticiones_asincronas = models.CharField(max_length= 500, choices= OPCIONES)
+	requiereUI = models.CharField(max_length=500, choices=OPCIONES)
+	diseno_responsive = models.CharField(max_length=500, choices=OPCIONES)
+	diseno_desarrollo_peticiones_asincronas = models.CharField(max_length=500, choices=OPCIONES)
 
 	#Backend
-	requiereBK  = models.CharField(max_length= 500, choices= OPCIONES)
-	interaccion_BD = models.CharField(max_length= 500, choices= OPCIONES)
-	interaccion_webservices = models.CharField(max_length= 500, choices= OPCIONES)
-	numero_dependencias = models.CharField(max_length= 500, choices= OPCIONES)
-	manejo_peticiones = models.CharField(max_length= 500, choices= OPCIONES)
-	pruebas_unitarias = models.CharField(max_length= 500, choices= OPCIONES)
-	logs = models.CharField(max_length= 500, choices= OPCIONES)
-	usoORM = models.CharField(max_length= 500, choices= OPCIONES)
-
+	requiereBK  = models.CharField(max_length=500, choices=OPCIONES)
+	interaccion_BD = models.CharField(max_length=500, choices=OPCIONES)
+	interaccion_webservices = models.CharField(max_length=500, choices=OPCIONES)
+	numero_dependencias = models.CharField(max_length=500, choices=OPCIONES)
+	manejo_peticiones = models.CharField(max_length=500, choices=OPCIONES)
+	pruebas_unitarias = models.CharField(max_length=500, choices=OPCIONES)
+	logs = models.CharField(max_length=500, choices=OPCIONES)
+	usoORM = models.CharField(max_length=500, choices=OPCIONES)
 
 	def calcula_uso_framework(self):
 		if self.uso_framework == 'Si':
@@ -160,7 +155,7 @@ class Estimacion(models.Model):
 	def calculo_estimacion(self): 
 		proyecto = self.historiaHH.proyecto
 		complejidad = ComplejidadDelProyecto.obtener_complejidad_del_proyecto(proyecto, self.estimador)
-		a = (self.calcula_diseno_responsive() + self.calcula_diseno_desarrollo_peticiones_asincronas()+ self.calcula_interaccion_BD()+ self.calcula_interaccion_webservices()+self.calcula_numero_dependencias()+self.calcula_manejo_peticiones()+self.calcula_pruebas_unitarias()+ self.calcula_logs()+self.calcula_usoORM() + intercepto+complejidad.sumatoria)
+		a = (self.calcula_diseno_responsive() + self.calcula_diseno_desarrollo_peticiones_asincronas() + self.calcula_interaccion_BD() + self.calcula_interaccion_webservices() + self.calcula_numero_dependencias() + self.calcula_manejo_peticiones() + self.calcula_pruebas_unitarias() + self.calcula_logs() + self.calcula_usoORM() + intercepto + complejidad.sumatoria)
 		estimacionF = (a*self.calcula_uso_framework()) - (a*self.porcentaje_reutilizacion*self.calcula_uso_framework())
 		print ("Esta es la sumatorio")
 		print (complejidad.sumatoria)

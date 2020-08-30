@@ -10,7 +10,7 @@ def verificar_cargo(cargos_permitidos):
     def _method_wrapper(view_method):
         def _arguments_wrapper(request, *args, **kwargs):
             request_inicial = request
-            if hasattr(request, "request"):  # Es una CBV
+            if hasattr(request, "request"):
                 request = request.request
 
             try:
@@ -25,27 +25,6 @@ def verificar_cargo(cargos_permitidos):
             return view_method(request_inicial, *args, **kwargs)
         return _arguments_wrapper
     return _method_wrapper
-
-
-# Funcion que me permite dejar solo la primera letra en mayuscula de ciertos campos de un formulario
-# PARAMS:
-# form_data = datos del formulario
-# campos = listado de campos del formulario los cuales queremos convertir la primera letra en mayuscula
-def capitalizar_texto_campos(form_data, campos):
-    for campo in campos:
-        form_data[campo] = form_data[campo].lower().capitalize()
-    return form_data
-
-# Funcion que me permite convertir a mayuscula ciertos campos de un formulario
-# PARAMS:
-# form_data = datos del formulario
-# campos = listado de campos del formulario los cuales queremos convertir en mayuscula
-def mayuscula_texto_campos(form_data, campos):
-    for campo in campos:
-        form_data[campo] = form_data[campo].upper()
-    return form_data
-
-
 
 # Funcion que me retorna el selector de fecha
 def MyDateWidget():

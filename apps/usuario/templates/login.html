@@ -2,7 +2,9 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-{% block titulo %} Login {% endblock titulo %}
+{% block titulo %} 
+    Login 
+{% endblock titulo %}
 
 {% block css %}
     <link href="{% static 'css/lib/toastr/toastr.min.css' %}" rel="stylesheet">
@@ -50,7 +52,6 @@
 
 {% block js %}
     <script src="{% static 'js/lib/toastr/toastr.min.js' %}"></script>
-
     <script type="text/javascript">
         $('form').attr('autocomplete','off');
         {% for msg in messages %}
