@@ -242,6 +242,8 @@
                     {% include "menu_manager.html" %}
                 {% elif user.cargo == "Integrante" %}
                     {% include "menu_usuario.html" %}
+                {% elif user.cargo == "ProductO" %}
+                    {% include "menu_productO.html" %}
                 {% endif %}
 
                 <!-- End Sidebar navigation -->

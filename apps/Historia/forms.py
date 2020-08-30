@@ -18,7 +18,7 @@ class CrearHistoriaForm(forms.ModelForm):
 		self.fields['quiero'].label = 'Quiero'
 		self.fields['actores'].label = 'Actores'
 		self.fields['para'].label = 'Para'
-		self.fields['criterios_aceptacion'].label = 'Cri terios de aceptación'
+		self.fields['criterios_aceptacion'].label = 'Criterios de aceptación'
 		self.fields['prioridad'].label = 'Prioridad'
 
 		self.fields['nombre'].required = True

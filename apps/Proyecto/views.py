@@ -78,7 +78,7 @@ def modificarProyecto(request, id_proyecto):
     return render(request, "modificar_proyecto.html", {'form': form})
 
     
-@verificar_cargo(cargos_permitidos=["Manager", "Integrante"])
+@verificar_cargo(cargos_permitidos=["Manager", "Integrante", "ProductO"])
 def listarProyectos(request):
     from django.db.models import Q
     listar_proyectos = Proyecto.objects.filter(Q(creador= request.user) | Q(miembros=request.user)).distinct()
@@ -86,7 +86,7 @@ def listarProyectos(request):
         "listar_proyectos": listar_proyectos,
     })
 
-@verificar_cargo(cargos_permitidos=["Manager", "Integrante"])
+@verificar_cargo(cargos_permitidos=["Manager", "Integrante", "ProductO"])
 def estimacion_proyecto(request):
     from django.db.models import Q
     estimacion_proyecto = Proyecto.objects.filter(Q(creador= request.user) | Q(miembros=request.user)).distinct()
@@ -97,7 +97,7 @@ def estimacion_proyecto(request):
 
     return render(request,"estimacion_proyecto.html",contexto)   
 
-@verificar_cargo(cargos_permitidos=["Manager", "Integrante"])
+@verificar_cargo(cargos_permitidos=["Manager", "Integrante", "ProductO"])
 def perfil_proyecto(request, id_proyecto):
     try:
         proyecto = Proyecto.objects.get(id=id_proyecto)

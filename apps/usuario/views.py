@@ -84,7 +84,7 @@ def crear_modificar_usuario(request, id_usuario=None):
 
 	return render(request, "crear_modificar_usuario.html", {'form': form})
 
-@verificar_cargo(cargos_permitidos=["Administrador", "Manager", "Integrante"])
+@verificar_cargo(cargos_permitidos=["Administrador", "Manager", "Integrante", "ProductO"])
 def usuario_modificar(request, id_usuario=None):
 	usuario = Usuario.verificar_existencia_usuario(id_usuario)
 	clase_form = ModificarUsuarioForm

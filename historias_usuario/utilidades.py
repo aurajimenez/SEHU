@@ -60,13 +60,3 @@ def MyTimeWidget():
     return TimeWidget(usel10n=False, bootstrap_version=3, options={'format': 'hh:ii', 'startView':1, 'language':'es'})   
 
 
-# Params: Diccionario con los datos descritos en: https://docs.djangoproject.com/en/1.11/topics/email/#emailmessage-objects
-def enviar_email(request=None,**datos):
-    from django.core.mail import EmailMessage
-    mensaje_error = datos.get("mensaje_error","Error al enviar correo")
-    try:
-        email = EmailMessage(subject=datos["subject"], body=datos["body"], to=datos["to"])
-        email.send()
-    except OSError:
-        if request:
-            messages.error(request,mensaje_error)

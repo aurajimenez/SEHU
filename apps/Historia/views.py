@@ -109,7 +109,7 @@ def criteriosHistoria(request, id_historia):
 	return render(request, "criterios_aceptacion.html", {'formset': formset})
 
 
-@verificar_cargo(cargos_permitidos=["Manager", "Integrante"])
+@verificar_cargo(cargos_permitidos=["Manager", "Integrante", "ProductO"])
 def listarHistorias(request):
 	from django.db.models import Count, Q
 	proyectos_con_historias = Proyecto.objects.annotate(numero_historias=Count("historias_del_proyecto")).filter(Q(creador= request.user) | Q(miembros=request.user)).filter(numero_historias__gt=0)
@@ -117,7 +117,7 @@ def listarHistorias(request):
 		"proyectos_con_historias": proyectos_con_historias,
 	})
 
-@verificar_cargo(cargos_permitidos=["Manager", "Integrante"])
+@verificar_cargo(cargos_permitidos=["Manager", "Integrante", "ProductO"])
 def perfil_historia(request, id_historia):
 	try:
 

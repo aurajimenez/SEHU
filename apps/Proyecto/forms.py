@@ -109,7 +109,7 @@ class EstimarProyectoForm(forms.ModelForm):
 		self.fields['proyecto_unico'].label = 'Al estar involucrado en más de un proyecto al tiempo ¿Cómo cree que afecta el esfuerzo de desarrollo?'
 		self.fields['conocimiento_tecnologias'].label = '¿Tiene conocimiento previo de las tecnologías del proyecto?'
 		self.fields['grado_acierto_estimar'].label = '¿Cuál considera ha sido su grado de acierto en pasadas estimaciones?'
-		self.fields['experiencia_estimador'].label = '¿Cuál es su grado de experiencia?'
+		self.fields['experiencia_estimador'].label = '¿Cuál es su grado de experiencia en el ciclo de vida de un proyecto?'
 		#proyecto_unico = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=OPCIONES)
 
 		self.fields['proyecto_unico'].required = True

@@ -15,6 +15,7 @@ class Usuario(AbstractUser):
 		('Administrador', 'Administrador'),
 		('Integrante','Integrante'),
 		('Manager','Manager'),
+		('ProductO','ProductO'),
 		)
 
 	ENFOQUE = (
@@ -24,7 +25,6 @@ class Usuario(AbstractUser):
 		('QA','QA'),
 		('CEO','CEO')
 		)
-
 
 	username = models.CharField(max_length= 20, verbose_name= "username", unique=True)
 	cargo = models.CharField(max_length= 50, choices= CARGOS)
