@@ -6,3 +6,4 @@ django-taggit==0.22.2
 django-multiselectfield==0.1.8
 django_select2==5.11.1
 Pillow==6.1.0
+python-dotenv
