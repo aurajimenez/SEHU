@@ -7,3 +7,4 @@ configuracionBD.json
 media/
 .idea/
 static_collected/
+settings.py
