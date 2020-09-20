@@ -11,3 +11,4 @@ settings.py
 .env/
 env/
 historias_usuario/.env
+historias_usuario/env/
