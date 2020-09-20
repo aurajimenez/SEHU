@@ -8,3 +8,5 @@ media/
 .idea/
 static_collected/
 settings.py
+.env
+historias_usuario/.env
