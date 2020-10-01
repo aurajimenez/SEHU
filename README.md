@@ -34,4 +34,3 @@ SEHU is a web application developed in framework Django which allows to manageme
 | 16| Visualizar estimación final de la US | d |
 | 17| Realizar la estimación del grado de complejidad del proyecto| d |
 | 18| Reporte de la estimación total del proyecto| d |
-| 19| Reporte desviación de las estimaciones individuales respecto al promedio| d |
